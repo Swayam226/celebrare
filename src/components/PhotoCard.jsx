@@ -1,4 +1,4 @@
-function PhotoCard({ photo }) {
+function PhotoCard({ photo, toggleFavourite, isFavourite }) {
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden">
       <img
@@ -10,7 +10,12 @@ function PhotoCard({ photo }) {
       <div className="p-3 flex justify-between items-center">
         <p className="text-sm font-medium">{photo.author}</p>
 
-        <button className="text-gray-400 text-lg">♥</button>
+        <button
+          onClick={() => toggleFavourite(photo)}
+          className={`text-lg ${isFavourite ? "text-red-500" : "text-gray-400"}`}
+        >
+          ♥
+        </button>
       </div>
     </div>
   );

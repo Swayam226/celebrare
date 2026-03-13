@@ -10,6 +10,20 @@ function Gallery() {
 
   const [search, setSearch] = useState("");
 
+  const [favourites, dispatch] = useReducer(favouritesReducer, []);
+
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("favourites")) || [];
+    dispatch({ type: "INIT", payload: stored });
+  }, []);
+
+  function toggleFavourite(photo) {
+    dispatch({
+      type: "TOGGLE_FAV",
+      payload: photo,
+    });
+  }
+
   const handleSearchChange = useCallback((e) => {
     setSearch(e.target.value);
   }, []);
@@ -33,7 +47,12 @@ function Gallery() {
       <SearchBar value={search} onChange={handleSearchChange} />
       <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         {filteredPhotos.map((photo) => (
-          <PhotoCard key={photo.id} photo={photo} />
+          <PhotoCard
+            key={photo.id}
+            photo={photo}
+            toggleFavourite={toggleFavourite}
+            isFavourite={favourites.some((fav) => fav.id === photo.id)}
+          />
         ))}
       </div>
     </div>
