@@ -1,9 +1,13 @@
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
-  return <></>;
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <h1 className="text-3xl font-bold">Photo Gallery</h1>
+    </div>
+  );
 }
 
 export default App;
